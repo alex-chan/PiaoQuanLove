@@ -1,0 +1,26 @@
+{
+  "name": "html5-boilerplate",
+  "description": "",
+  "main": "",
+  "authors": [
+    "AlexChen <alexchen@misfit.com>"
+  ],
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/h5bp/html5-boilerplate/blob/master/LICENSE.txt"
+  },
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "iswiper": "^1.4.1",
+    "zepto-touch": "zeptotouch#^1.1.4",
+    "zepto": "^1.1.6"
+  }
+}

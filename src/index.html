@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title></title>
-        <meta name="description" content="">
+        <title>我有一个单身的朋友想介绍给你,我觉得TA真的很不错</title>
+        <meta name="description" content="单身">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -69,12 +69,23 @@
                 from {
                     trasform: translate(0,0);
                 }
+                to {
+                    transform: translate(0, -100vh);
+                }
 
             }
             .slideUp {
                 animation: slideUp1 1s;
-                /*animation-play-state: paused;*/
-                transform: translate(0,-100vh);
+                animation-play-state: paused;
+                /*transform: translate(0,-100vh);*/
+            }
+
+            .swipe-sections section.love-claims {
+
+                background-image: url("img/loveletter_bg_sm.jpeg");
+                background-repeat: no-repeat;
+                background-size: 100vh 100vh;
+
             }
 
 
@@ -87,18 +98,36 @@
 
         <!-- Add your site or application content here -->
         <div class="swipe-sections">
-            <section class="active" style="background-color: #b3d4fc">
-                <div>我是一个大傻逼</div>
+            <section class="active love-claims" style="background-color: #b3d4fc">
+                <h2>爱情独白</h2>
+                <div>
+                    <p>不知道从何时起...balabalabala</p>
+                    <p>突然有点想...balabalabala</p>
+                </div>
+
             </section>
-            <section style="background-color: #3f004f">
-                <div>你TM才是一个大傻逼</div>
+            <section style="background-color: #8fa08f">
+                <h2>基本情况</h2>
+                <div>
+                    <div>
+                        <span>学历: 大学本科</span>
+                        <span>年龄: 29</span>
+                        <span>性别: 男</span>
+                        <span>所在地: 深圳</span>
+                        <span>故乡: 湖南</span>
+                        <span>兴趣: 游泳 徒步 骑行</span>
+
+                    </div>
+                </div>
 
             </section>
             <section style="background-color: #0033ff">
+                <h2>好友评价</h2>
                 <div>你们全家都是大傻逼</div>
 
             </section>
             <section style="background-color: #309000">
+                <h2>我的真相</h2>
                 <div>好吧,我是大傻逼</div>
 
             </section>
@@ -108,6 +137,7 @@
 
         <script src="../bower_components/zepto/zepto.js"></script>
         <script src="../bower_components/zepto-touch/zepto-touch.js"></script>
+        <script src="js/vendor/fx.js"></script>
         <script>
             $(function(){
                 document.addEventListener('touchmove', function (event) {
@@ -115,39 +145,49 @@
                 }, false);
 
 
+                var activeIndex = 0;
 
-                $(document).click(function(){
-//                    var top = $(".swipe-sections").css("margin-top");
-//                    var top2 = parseInt(top.substring(0, top.length-2));
-//                    var newTop = (top2 - 100) + "vh"
-//                    $(".swipe-sections").css("margin-top", newTop);
+                var total = $(".swipe-sections section").length;
 
 
-                    var current = $(".swipe-sections section.active");
-                    var next = current.next();
+                $(document).swipeUp(function(){
 
-                    console.log(current);
-                    console.log(next);
+                    var to = activeIndex + 1;
+                    if( to >= total) {
+                        to = 0;
+                    }
 
-                    $('body').addClass("slideUp");
+                    var trans = -to * 100 + "vh" ;
 
-//                    next.addClass("slideUp").css("animation-play-state", "running");
-
-
-//                    current.animate('slideUpCurrentPage', function(){
-//
-//                        current.removeClass("active");
-//                        next.addClass("active");
-//
-//                    });
-
-
-//                    $('body').toggleClass('paused', $(this).css(playState) === 'paused');
-//
+                    $("body").animate({
+                        translateY: trans
+                    }, 400, function(){
+                        activeIndex++;
+                        if(activeIndex >= total){
+                            activeIndex = 0;
+                        }
+                    });
                 });
 
                 $(document).swipeDown(function(){
-//                    alert("swipe");
+
+                    var to = activeIndex - 1;
+                    if( to <= 0){
+                        to = 0;
+                    }
+
+
+                    var trans = -to * 100 + "vh" ;
+
+                    $("body").animate({
+                        translateY: trans
+                    }, 400, function(){
+                        activeIndex--;
+                        if(activeIndex < 0){
+                            activeIndex = 0;
+                        }
+
+                    });
                 });
             });
 
